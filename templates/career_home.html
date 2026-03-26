@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Prediction - Career.ly</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 20px;
+            padding-bottom: 50px;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background: linear-gradient(45deg, #7846a7, #9168c3);
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+            padding: 20px;
+        }
+        .form-group label {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .btn-primary {
+            background-color: #7846a7;
+            border-color: #7846a7;
+            padding: 10px 30px;
+            font-weight: 600;
+            border-radius: 30px;
+        }
+        .btn-primary:hover {
+            background-color: #6a3b96;
+            border-color: #6a3b96;
+        }
+        .form-control {
+            border-radius: 8px;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+        }
+        .form-control:focus {
+            box-shadow: 0 0 0 0.2rem rgba(120, 70, 167, 0.25);
+            border-color: #7846a7;
+        }
+        .section-title {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #7846a7;
+        }
+        .info-box {
+            background-color: #e9f0fd;
+            border-left: 4px solid #7846a7;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        /* Hide Next Steps sections */
+        .next-steps-section,
+        [id^="next-steps"],
+        [class^="next-steps"],
+        [id*="next-steps"],
+        [class*="next-steps"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            width: 0 !important;
+            overflow: hidden !important;
+            position: absolute !important;
+            left: -9999px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="text-center mb-5">
+                    <h1 class="display-4">Career Prediction</h1>
+                    <p class="lead">Discover your ideal career path based on your skills and interests</p>
+                </div>
+                
+                <div class="card mb-5">
+                    <div class="card-header">
+                        <h3 class="mb-0"><i class="fas fa-user-graduate mr-2"></i>Career Assessment</h3>
+                        <p class="mb-0">Answer these questions to get personalized career recommendations</p>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <div class="info-box mb-4">
+                            <p class="mb-0"><i class="fas fa-info-circle mr-2"></i>This assessment uses machine learning to analyze your skills, interests, and aptitude to recommend suitable career paths.</p>
+                        </div>
+                        
+                        <form method="POST" action="http://127.0.0.1:5000/predict">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="section-title">Technical Skills</h4>
+                                    
+                                    <div class="form-group">
+                                        <label for="programming">How would you rate your programming skills?</label>
+                                        <select class="form-control" id="programming" name="programming" required>
+                                            <option value="">Select an option</option>
+                                            <option value="1">Beginner - Little to no experience</option>
+                                            <option value="2">Basic - Understand fundamentals</option>
+                                            <option value="3">Intermediate - Comfortable with programming</option>
+                                            <option value="4">Advanced - Expert programmer</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="database">How comfortable are you with databases?</label>
+                                        <select class="form-control" id="database" name="database" required>
+                                            <option value="">Select an option</option>
+                                            <option value="1">Not familiar with databases</option>
+                                            <option value="2">Basic knowledge of database concepts</option>
+                                            <option value="3">Comfortable with SQL and database design</option>
+                                            <option value="4">Advanced database management skills</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="problem_solving">How would you rate your problem-solving abilities?</label>
+                                        <select class="form-control" id="problem_solving" name="problem_solving" required>
+                                            <option value="">Select an option</option>
+                                            <option value="1">Basic problem-solving skills</option>
+                                            <option value="2">Good at solving straightforward problems</option>
+                                            <option value="3">Strong analytical and problem-solving skills</option>
+                                            <option value="4">Exceptional at solving complex problems</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <h4 class="section-title">Soft Skills & Preferences</h4>
+                                    
+                                    <div class="form-group">
+                                        <label for="communication">How would you rate your communication skills?</label>
+                                        <select class="form-control" id="communication" name="communication" required>
+                                            <option value="">Select an option</option>
+                                            <option value="1">Basic communication skills</option>
+                                            <option value="2">Good communicator in familiar settings</option>
+                                            <option value="3">Strong communicator in most situations</option>
+                                            <option value="4">Excellent communicator in all contexts</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="interest">What interests you most?</label>
+                                        <select class="form-control" id="interest" name="interest" required>
+                                            <option value="">Select an option</option>
+                                            <option value="1">Building applications and websites</option>
+                                            <option value="2">Analyzing data and finding patterns</option>
+                                            <option value="3">Cybersecurity and protecting systems</option>
+                                            <option value="4">Artificial Intelligence and Machine Learning</option>
+                                            <option value="5">Business processes and project management</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="experience">What is your level of experience?</label>
+                                        <select class="form-control" id="experience" name="experience" required>
+                                            <option value="">Select an option</option>
+                                            <option value="1">No professional experience</option>
+                                            <option value="2">1-2 years of experience</option>
+                                            <option value="3">3-5 years of experience</option>
+                                            <option value="4">5+ years of experience</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-search mr-2"></i>Get Career Recommendations
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="text-center mb-5">
+                    <p class="text-muted">
+                        <i class="fas fa-lock mr-1"></i>Your assessment data is used only for generating recommendations and is not stored.
+                    </p>
+                    <a href="http://localhost/INTELLIGENT-CAREER-GUIDANCE-SYSTEM-main/career_redirect.php" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left mr-1"></i>Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    
+    <script>
+        // Function to remove any Next Steps sections
+        function removeNextStepsSections() {
+            // Remove elements with IDs containing "next-steps"
+            document.querySelectorAll('[id*="next-steps"]').forEach(el => el.remove());
+            
+            // Remove elements with classes containing "next-steps"
+            document.querySelectorAll('[class*="next-steps"]').forEach(el => el.remove());
+            
+            // Remove elements with heading text containing "Next Steps"
+            document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(heading => {
+                if (heading.textContent.toLowerCase().includes('next steps')) {
+                    // Find the closest parent section or card
+                    const section = heading.closest('.card, .section, section, div');
+                    if (section) {
+                        section.remove();
+                    } else {
+                        heading.remove();
+                    }
+                }
+            });
+        }
+        
+        // Run when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            removeNextStepsSections();
+            
+            // Also run after a short delay to catch any dynamically added elements
+            setTimeout(removeNextStepsSections, 500);
+            setTimeout(removeNextStepsSections, 1500);
+            setTimeout(removeNextStepsSections, 3000);
+        });
+    </script>
+</body>
+</html> 
